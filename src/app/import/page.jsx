@@ -1,9 +1,11 @@
 "use client";
 
 import classes from './page.module.css';
-import UploadFileForm from '@/components/UploadFileForm';
+import UploadFileForm from '@/components/upload-file-form';
 import CompanyNameDropdown from '@/components/fields/company-name-dropdown';
 import { useState } from 'react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFileImport } from "@fortawesome/free-solid-svg-icons";
 
 const companyNames = {
   "dupixent": "Dupixent",
@@ -28,7 +30,10 @@ export default function ImportPage() {
     <>
       <main>
         <section className={classes.section}>
-          <h2>Import</h2>
+          <h2>
+            <FontAwesomeIcon icon={faFileImport} className="me-2" />
+            Import
+          </h2>
           <p>Here you can select a file to import.</p>
           <div className="alert alert-info" role="alert">
             Once the process is finished you will be redirected to the list of processed data.

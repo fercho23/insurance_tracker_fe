@@ -1,11 +1,13 @@
 import NavLink from '@/components/main-header/nav-link'
-import classes from './main-header.module.css'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouse } from "@fortawesome/free-solid-svg-icons";
 
 export default function MainHeader() {
   return (
     <>
       <nav className="navbar navbar-dark bg-primary navbar-expand-lg">
-        <div className="container-fluid">
+        <div className="container-fluid text-white">
+          <FontAwesomeIcon icon={faHouse} className="me-2" />
           <NavLink className="navbar-brand" href="/">Insurance Tracker</NavLink>
           <button
             className="navbar-toggler"

@@ -1,7 +1,10 @@
 "use client";
+import { faList } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useEffect } from 'react';
+import AlertError from "@/components/alert-error";
 import Link from 'next/link';
-import Modal from '@/components/Modal';
+import Modal from '@/components/modal';
 
 export default function DataProcessedPage() {
   const [dataProcessed, setDataProcessed] = useState(null);
@@ -48,10 +51,22 @@ export default function DataProcessedPage() {
     fetchData();
   }, [currentPage]);
 
+  if (error) {
+    return <AlertError message={error} />;
+  }
+
   return (
     <div className='row'>
-      <div className='col-12 text-center mt-1'>
-        <h1>Data Processed</h1>
+      <div className='col-12 mt-1'>
+        <h1>
+          <FontAwesomeIcon icon={faList} className="me-2" />
+          Data Processed
+        </h1>
+      </div>
+      <div className='col-12'>
+        <div className="alert alert-info" role="alert">
+          List of processed data.
+        </div>
       </div>
       <div className='col-12'>
         {error && <p className="text-danger">{error}</p>}

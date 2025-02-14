@@ -2,15 +2,17 @@
 
 import { usePathname } from 'next/navigation'
 import Link from 'next/link';
-import classes from './nav-link.module.css'
 
 export default function NavLink({ href, children }) {
   const path = usePathname();
+  const className = (
+    href === '/' ? path === href : path.startsWith(href)
+  ) ? 'nav-link active' : 'nav-link';
 
   return (
     <Link
       href={href}
-      className={path.startsWith(href) ? 'nav-link active' : 'nav-link'}
+      className={className}
     >
       { children }
     </Link>
