@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import classes from './page.module.css';
 import Link from 'next/link';
+import Modal from '@/components/Modal';
 
 export default function DataProcessedPage() {
   const [dataProcessed, setDataProcessed] = useState(null);
@@ -9,27 +10,44 @@ export default function DataProcessedPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const beUrl = process.env.NEXT_PUBLIC_BE_URL;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`${beUrl}/api/data_processed?page=${currentPage}`);
-        if (response.ok) {
-          const data = await response.json();
-          setDataProcessed(data);
-        } else {
-          const errorMessage = await response.text();
-          setError(errorMessage);
-        }
-      } catch (error) {
-        setError('Error fetching data');
+  const fetchData = async () => {
+    try {
+      const response = await fetch(`${beUrl}/api/data_processed?page=${currentPage}`);
+      if (response.ok) {
+        const data = await response.json();
+        setDataProcessed(data);
+      } else {
+        const errorMessage = await response.text();
+        setError(errorMessage);
       }
-    };
-    fetchData();
-  }, [currentPage]);
+    } catch (error) {
+      setError('Error fetching data');
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch(`${beUrl}/api/data_processed/${id}`, {
+        method: 'DELETE',
+      });
+      if (response.ok) {
+        // Fetch the data again to update the table
+        fetchData();
+      } else {
+        setError('Error deleting data');
+      }
+    } catch (error) {
+      setError('Error deleting data');
+    }
+  };
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+
+  useEffect(() => {
+    fetchData();
+  }, [currentPage]);
 
   return (
     <div className='row'>
@@ -48,6 +66,7 @@ export default function DataProcessedPage() {
                   <th>Program</th>
                   <th>Eligibility</th>
                   <th>Detail</th>
+                  <th>Delete</th>
                 </tr>
               </thead>
               <tbody>
@@ -62,11 +81,29 @@ export default function DataProcessedPage() {
                         Details
                       </Link>
                     </td>
+                    <td>
+                      <button
+                        type="button"
+                        className="btn btn-danger"
+                        data-bs-toggle="modal"
+                        data-bs-target={`#deleteModal${dataProcessed.results[key].id}`}
+                      >
+                        Delete
+                      </button>
+                      <Modal
+                        id={`deleteModal${dataProcessed.results[key].id}`}
+                        title="Delete Confirmation"
+                        onClose={() => console.log('Modal closed')}
+                        onConfirm={() => handleDelete(dataProcessed.results[key].id)}
+                      >
+                        Are you sure you want to delete this data processed?
+                      </Modal>
+                    </td>
                   </tr>
                 ))}
                 {Object.keys(dataProcessed.results).length == 0 && (
                   <tr>
-                    <td colSpan="5">
+                    <td colSpan="6">
                       <div className="alert alert-secondary" role="alert">
                         No data found
                       </div>
