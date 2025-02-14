@@ -1,0 +1,47 @@
+
+.header {
+  display: flex;
+  gap: 3rem;
+  margin: 3rem auto;
+  width: 90%;
+  max-width: 75rem;
+}
+
+.slideshow {
+  width: 40rem;
+  height: 25rem;
+}
+
+.hero {
+  color: #7b72fc;
+  font-size: 1.5rem;
+}
+
+.hero h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.15rem;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #32304b, #4c499e);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.links {
+  font-size: 1.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  color: #2a4ff3;
+  font-size: 1.5rem;
+  max-width: 50rem;
+  width: 90%;
+  margin: 2rem auto;
+  text-align: center;
+}
