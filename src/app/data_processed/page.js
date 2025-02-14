@@ -53,9 +53,9 @@ export default function DataProcessedPage() {
                 {Object.keys(dataProcessed.results).map((key, index) => (
                   <tr key={index}>
                     <td>{dataProcessed.results[key].created}</td>
-                    <td>{dataProcessed.results[key].processed_data.details.program}</td>
-                    <td>{dataProcessed.results[key].processed_data.details.eligibility}</td>
-                    <td>{dataProcessed.results[key].company.slug}</td>
+                    <td>{dataProcessed.results[key].processed_data?.details.program}</td>
+                    <td>{dataProcessed.results[key].processed_data?.details.eligibility}</td>
+                    <td>{dataProcessed.results[key].company?.slug}</td>
                   </tr>
                 ))}
               </tbody>
