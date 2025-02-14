@@ -44,9 +44,10 @@ export default function DataProcessedPage() {
               <thead>
                 <tr>
                   <th>Created</th>
+                  <th>Company</th>
                   <th>Program</th>
                   <th>Eligibility</th>
-                  <th>Company</th>
+                  <th>Detail</th>
                 </tr>
               </thead>
               <tbody>
@@ -56,11 +57,16 @@ export default function DataProcessedPage() {
                     <td>{dataProcessed.results[key].processed_data?.details.program}</td>
                     <td>{dataProcessed.results[key].processed_data?.details.eligibility}</td>
                     <td>{dataProcessed.results[key].company?.slug}</td>
+                    <td>
+                      <Link href={`/data_processed/${dataProcessed.results[key].id}`} className="btn btn-link">
+                        Details
+                      </Link>
+                    </td>
                   </tr>
                 ))}
                 {Object.keys(dataProcessed.results).length == 0 && (
-                  <tr colSpan="4">
-                    <td colSpan="4">
+                  <tr>
+                    <td colSpan="5">
                       <div className="alert alert-secondary" role="alert">
                         No data found
                       </div>

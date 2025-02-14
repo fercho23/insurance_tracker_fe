@@ -1,7 +1,9 @@
 "use client";
 import { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation'
 
-export default function DataProcessedDetail({ params }) {
+export default function DataProcessedDetail() {
+  const params = useParams();
   const [dataProcessed, setDataProcessed] = useState(null);
   const [error, setError] = useState(null);
   const beUrl = process.env.NEXT_PUBLIC_BE_URL;
