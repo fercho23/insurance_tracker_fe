@@ -20,6 +20,7 @@ export default function ImportPage() {
   };
 
   const handleFileIsBeingProcess = (uploadedFileIsBeingProcess) => {
+    console.log("uploadedFileIsBeingProcess", uploadedFileIsBeingProcess)
     setUploadedFileIsBeingProcess(uploadedFileIsBeingProcess)
   };
 
@@ -34,7 +35,6 @@ export default function ImportPage() {
           </div>
           <div className="row">
             <div className="col">
-              {uploadedFileIsBeingProcess ? 'Si' : 'No'}
               <CompanyNameDropdown
                 companyNames={companyNames}
                 onCompanyChange={handleCompanyChange}

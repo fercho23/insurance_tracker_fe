@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation'
 
-const UploadFileForm = ({ urlToUpload, redirectUrl=undefined }) => {
+const UploadFileForm = ({ urlToUpload, redirectUrl=undefined, onUploadedFileIsBeingProcess }) => {
   const [selectedFile, setSelectedFile] = useState(null);
   // const [uploadedFileSuccess, setUploadedFileSuccess] = useState(null);
   // const [uploadedFileError, setUploadedFileError] = useState(null);
@@ -20,6 +20,7 @@ const UploadFileForm = ({ urlToUpload, redirectUrl=undefined }) => {
       return;
     }
     setUploadedFileIsBeingProcess(true);
+    onUploadedFileIsBeingProcess(true);
     setUploadedFileMessage(null);
 
     const formData = new FormData();
@@ -32,6 +33,7 @@ const UploadFileForm = ({ urlToUpload, redirectUrl=undefined }) => {
       });
 
       setUploadedFileIsBeingProcess(false);
+      onUploadedFileIsBeingProcess(false);
 
       if (response.ok) {
         setUploadedFileMessage('File uploaded successfully');
