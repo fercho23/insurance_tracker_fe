@@ -1,5 +1,5 @@
 "use client";
-import { faList } from "@fortawesome/free-solid-svg-icons";
+import { faList, faInfo, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useEffect } from 'react';
 import AlertError from "@/components/alert-error";
@@ -91,8 +91,12 @@ export default function DataProcessedPage() {
                     <td>{dataProcessed.results[key].processed_data?.details.eligibility}</td>
                     <td>{dataProcessed.results[key].company?.slug}</td>
                     <td>
-                      <Link href={`/data_processed/${dataProcessed.results[key].id}`} className="btn btn-link">
-                        Details
+                      <Link
+                        href={`/data_processed/${dataProcessed.results[key].id}`}
+                        className="btn btn-primary"
+                        title="Details"
+                      >
+                        <FontAwesomeIcon icon={faInfo}/>
                       </Link>
                     </td>
                     <td>
@@ -101,8 +105,9 @@ export default function DataProcessedPage() {
                         className="btn btn-danger"
                         data-bs-toggle="modal"
                         data-bs-target={`#deleteModal${dataProcessed.results[key].id}`}
+                        title="Delete"
                       >
-                        Delete
+                        <FontAwesomeIcon icon={faTrash} />
                       </button>
                       <Modal
                         id={`deleteModal${dataProcessed.results[key].id}`}

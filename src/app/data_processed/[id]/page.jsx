@@ -14,8 +14,6 @@ export default function DataProcessedDetail() {
   const fetchData = async () => {
     try {
       const response = await fetch(`${beUrl}/api/data_processed/${params.id}`);
-      // const data = await response.json();
-      // setDataProcessed(data);
       if (response.ok) {
         const data = await response.json();
         setDataProcessed(data);
