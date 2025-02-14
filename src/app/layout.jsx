@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
       <body>
         <BootstrapClient />
         <MainHeader />
-        <div className="container">
+        <div className="container mt-2">
           {children}
         </div>
       </body>
