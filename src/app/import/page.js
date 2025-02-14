@@ -12,10 +12,15 @@ const companyNames = {
 
 export default function ImportPage() {
   const [companyName, setCompanyName] = useState(null);
+  const [uploadedFileIsBeingProcess, setUploadedFileIsBeingProcess] = useState(false);
   const beUrl = process.env.NEXT_PUBLIC_BE_URL
 
   const handleCompanyChange = (companyName) => {
     setCompanyName(companyName)
+  };
+
+  const handleFileIsBeingProcess = (uploadedFileIsBeingProcess) => {
+    setUploadedFileIsBeingProcess(uploadedFileIsBeingProcess)
   };
 
   return (
@@ -29,9 +34,11 @@ export default function ImportPage() {
           </div>
           <div className="row">
             <div className="col">
+              {uploadedFileIsBeingProcess ? 'Si' : 'No'}
               <CompanyNameDropdown
                 companyNames={companyNames}
                 onCompanyChange={handleCompanyChange}
+                disabled={uploadedFileIsBeingProcess}
               />
             </div>
             <div className="col">
@@ -39,6 +46,7 @@ export default function ImportPage() {
                 <UploadFileForm
                   urlToUpload={`${beUrl}/api/process/${companyName}`}
                   redirectUrl="/data_processed"
+                  onUploadedFileIsBeingProcess={handleFileIsBeingProcess}
                 />
               )}
               {!companyName && (
