@@ -58,36 +58,46 @@ export default function DataProcessedPage() {
                     <td>{dataProcessed.results[key].company?.slug}</td>
                   </tr>
                 ))}
+                {Object.keys(dataProcessed.results).length == 0 && (
+                  <tr colSpan="4">
+                    <td colSpan="4">
+                      <div className="alert alert-secondary" role="alert">
+                        No data found
+                      </div>
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
-
-            <nav aria-label="Page navigation">
-              <ul className="pagination justify-content-center">
-                {dataProcessed.pagination.pages > 1 && (
-                  <li className="page-item">
-                    <Link href="#" onClick={() => handlePageChange(1)} className="page-link">
-                      First
-                    </Link>
-                  </li>
-                )}
-                {Array(dataProcessed.pagination.pages)
-                  .fill(null)
-                  .map((_, i) => (
-                    <li key={i} className={`page-item ${currentPage === i + 1 ? 'active' : ''}`}>
-                      <Link href="#" onClick={() => handlePageChange(i + 1)} className="page-link">
-                        {i + 1}
+            {dataProcessed.pagination.pages > 1 && (
+              <nav aria-label="Page navigation">
+                <ul className="pagination justify-content-center">
+                  {dataProcessed.pagination.pages > 1 && (
+                    <li className="page-item">
+                      <Link href="#" onClick={() => handlePageChange(1)} className="page-link">
+                        First
                       </Link>
                     </li>
-                  ))}
-                {dataProcessed.pagination.pages > 1 && (
-                  <li className="page-item">
-                    <Link href="#" onClick={() => handlePageChange(dataProcessed.pagination.pages)} className="page-link">
-                      Last
-                    </Link>
-                  </li>
-                )}
-              </ul>
-            </nav>
+                  )}
+                  {Array(dataProcessed.pagination.pages)
+                    .fill(null)
+                    .map((_, i) => (
+                      <li key={i} className={`page-item ${currentPage === i + 1 ? 'active' : ''}`}>
+                        <Link href="#" onClick={() => handlePageChange(i + 1)} className="page-link">
+                          {i + 1}
+                        </Link>
+                      </li>
+                    ))}
+                  {dataProcessed.pagination.pages > 1 && (
+                    <li className="page-item">
+                      <Link href="#" onClick={() => handlePageChange(dataProcessed.pagination.pages)} className="page-link">
+                        Last
+                      </Link>
+                    </li>
+                  )}
+                </ul>
+              </nav>
+            )}
           </div>
         )}
       </div>
